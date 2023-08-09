@@ -1,0 +1,118 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "es2021": true,
+    "commonjs": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:tailwindcss/recommended",
+    "plugin:@next/next/recommended",
+    "airbnb-base",
+    "airbnb/rules/react",
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "env": { "browser": true, "es6": true, "node": true },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": { "jsx": true },
+        "ecmaVersion": 2021,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+      },
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": 0
+      }
+    }
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
+  },
+  "plugins": ["react", "import", "react-hooks", "tailwindcss", "prettier"],
+  "rules": {
+    "@typescript-eslint/ban-ts-comment": 0,
+    "react/no-unescaped-entities": 0,
+    "react/forbid-prop-types": 0,
+    "react/prop-types": 0,
+    "react/jsx-filename-extension": 0,
+    "react/react-in-jsx-scope": 0,
+    "class-methods-use-this": 0,
+    "no-unused-expressions": ["error", { "allowTaggedTemplates": true, "allowShortCircuit": true }],
+    "no-underscore-dangle": 0,
+    "react/no-unused-prop-types": 0,
+    "consistent-return": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/destructuring-assignment": 0,
+    "import/no-unresolved": 0,
+    "import/extensions": 0,
+    "react/function-component-definition": 0,
+    "react/style-prop-object": 0,
+    "no-case-declarations": 0,
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", ["sibling", "index"], "parent", "unknown"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "react/jsx-boolean-value": ["warn", "always"],
+    "no-nested-ternary": ["warn"],
+    "import/prefer-default-export": 0,
+    "arrow-body-style": ["warn"],
+    "react/require-default-props": 0,
+    "no-console": ["warn"],
+    "default-param-last": 0,
+    "no-return-await": ["warn"],
+    "no-param-reassign": 0,
+    "no-plusplus": 0,
+    "no-use-before-define": [0],
+    "@typescript-eslint/no-shadow": "error",
+    "no-shadow": "off",
+    "react/jsx-props-no-spreading": 0,
+    "radix": ["warn"],
+    "react/button-has-type": ["warn"],
+    "no-return-assign": 0,
+    "global-require": ["warn"],
+    "react/no-array-index-key": ["warn"],
+    "valid-typeof": 0,
+    "no-restricted-exports": ["warn"],
+    "react/jsx-no-constructed-context-values": ["warn"],
+    "no-bitwise": ["warn"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/internal-regex": "^@/"
+  }
+}
