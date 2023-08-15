@@ -1,9 +1,11 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 
+import { FarcasterProfileService } from '@/models/farcaster/services/FarcasterProfileService';
 import { Button } from '@/modules/application/components/DesignSystem';
 import { FormikInputField } from '@/modules/common/components/Formik';
 
@@ -14,7 +16,11 @@ const validationSchema = yup.object().shape({
 const SearchForm = () => (
   <Formik
     onSubmit={async ({ query }) => {
-      console.log(query);
+      const supabase = createClientComponentClient();
+
+      const teamsService = new FarcasterProfileService(supabase);
+      const user = await teamsService.getByUsername(query);
+      console.log(user);
     }}
     initialValues={{
       query: '',
@@ -22,11 +28,11 @@ const SearchForm = () => (
     validateOnBlur={true}
     validationSchema={validationSchema}
   >
-    {() => (
+    {({ isSubmitting }) => (
       <Form>
         <div className="m-auto flex w-full max-w-sm flex-row items-start space-x-2">
           <FormikInputField name="query" size="xl" placeholder="limone.eth" />
-          <Button type="submit" size="xl">
+          <Button type="submit" size="xl" status={isSubmitting ? 'busy' : ''}>
             <Button.Icon icon={<MagnifyingGlassIcon className="w-5" />} />
           </Button>
         </div>
