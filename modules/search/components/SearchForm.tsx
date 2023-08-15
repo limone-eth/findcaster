@@ -13,14 +13,14 @@ const validationSchema = yup.object().shape({
   query: yup.string().trim().required('Enter a query'),
 });
 
-const SearchForm = () => (
+const SearchForm = ({ onResults }) => (
   <Formik
     onSubmit={async ({ query }) => {
       const supabase = createClientComponentClient();
 
       const teamsService = new FarcasterProfileService(supabase);
       const user = await teamsService.getByUsername(query);
-      console.log(user);
+      onResults(user);
     }}
     initialValues={{
       query: '',

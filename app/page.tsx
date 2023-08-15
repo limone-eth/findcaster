@@ -1,13 +1,13 @@
 import { ContentLayout } from '@/modules/application/components/DesignSystem';
 import { Footer } from '@/modules/application/components/Footer';
-import SearchForm from '@/modules/search/components/SearchForm';
+import Search from '@/modules/search/components/Search';
 
 export default async function IndexPage() {
   return (
     <ContentLayout>
       <ContentLayout.Content>
         <div className="relative flex h-screen w-full items-center justify-center">
-          <SearchForm />
+          <Search />
         </div>
       </ContentLayout.Content>
       <ContentLayout.Footer>
