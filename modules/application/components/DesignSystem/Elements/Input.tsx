@@ -46,13 +46,13 @@ const Input = forwardRef<HTMLInputElement, Input>(
     ref
   ) => {
     const inputClassNames = classNames(
-      'px-3 w-full text-primary-100 bg-gray-900 placeholder-gray-400 rounded-lg focus:outline-none',
+      'px-3 w-full text-primary-100 bg-white placeholder-gray-700 focus:outline-none',
       {
-        'border-2 border-gray-800': theme === 'default',
         'border-0 pl-0 focus:ring-transparent': theme === 'bare',
         'focus:ring-transparent focus:border-primary-500': status !== 'invalid' && theme === 'default',
-        'border-1 border-red-600 focus:border-red-300': status === 'invalid' && theme === 'default',
-        'text-xl leading-tight tracking-tight h-14': size === 'xl',
+        'border-1 border-red-600 focus:border-red-600 focus:ring-transparent':
+          status === 'invalid' && theme === 'default',
+        'text-xl leading-tight tracking-tight h-20': size === 'xl',
         'h-12': size === 'm',
         'text-sm h-10': size === 's',
         'font-normal': fontWeight === 'normal',
@@ -90,10 +90,8 @@ const Input = forwardRef<HTMLInputElement, Input>(
         />
         {showCount && maxLength && (
           <div
-            className={`absolute right-0 top-4 mr-3 mt-1 text-xs font-medium leading-none dark:bg-zinc-800 ${
-              inputValue && inputValue.length >= maxLength
-                ? 'font-semibold text-red-600'
-                : 'text-gray-300 dark:text-gray-400'
+            className={`absolute right-0 top-4 mr-3 mt-1 text-xs font-medium leading-none ${
+              inputValue && inputValue.length >= maxLength ? 'font-semibold text-red-600' : 'text-gray-300'
             }`}
           >
             {maxLength - (inputValue ? inputValue.length : 0)}

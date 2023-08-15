@@ -14,10 +14,10 @@ const ContentLayout = ({ children }: ContentLayout) => {
   const footer = findChildByRole(children, 'ContentLayout.Footer');
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="min-h-screen">
       {header && <header>{header}</header>}
-      <main>{content}</main>
-      {footer && <footer>{footer}</footer>}
+      <div>{content}</div>
+      {footer && <footer className="sticky top-[100vh]">{footer}</footer>}
     </div>
   );
 };

@@ -10,7 +10,7 @@ const satoshi = localFont({ src: '../fonts/satoshi/Satoshi-Variable.woff2', vari
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-violet-500">
       <body className={`${satoshi.variable} relative font-sans font-medium antialiased`}>
         {children}
         <div id={MODAL_ROOT_ID} />

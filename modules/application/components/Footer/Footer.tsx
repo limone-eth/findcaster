@@ -1,10 +1,18 @@
 'use client';
 
-import { format } from 'date-fns';
+import { Hyperlink, Text } from '@/modules/application/components/DesignSystem';
 
 const Footer = () => (
-  <div className="flex items-center justify-center bg-black p-5 text-sm tracking-wider text-gray-400 md:justify-between">
-    {`© ${format(new Date(), 'yyyy')} Findcaster`}
+  <div className="flex items-center justify-center p-5 text-sm tracking-wider text-gray-400 md:justify-between">
+    <div>
+      <Text>
+        We're in{' '}
+        <Hyperlink theme="decorated" href="https://buildspace.so/">
+          Buildspace
+        </Hyperlink>{' '}
+        S4
+      </Text>
+    </div>
   </div>
 );
 
