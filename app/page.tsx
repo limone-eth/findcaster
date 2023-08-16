@@ -6,9 +6,7 @@ export default async function IndexPage() {
   return (
     <ContentLayout>
       <ContentLayout.Content>
-        <div className="relative flex h-screen w-full items-center justify-center">
-          <Search />
-        </div>
+        <Search />
       </ContentLayout.Content>
       <ContentLayout.Footer>
         <Footer />

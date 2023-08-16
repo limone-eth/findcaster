@@ -1,6 +1,6 @@
 import { SupabaseClient } from '@supabase/supabase-js';
 
-import { ProfileInterface } from '@/models/farcaster/intrfaces/ProfileInterface';
+import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
 
 export const TABLE_PROFILE_NAME = 'profile';
 
@@ -21,6 +21,9 @@ export class FarcasterProfileService {
   }
 
   async getByUsername(username: string): Promise<ProfileInterface> {
+    if (!username) {
+      return null;
+    }
     const { data, error } = await this.supabaseClient
       .from(TABLE_PROFILE_NAME)
       .select()
@@ -29,7 +32,6 @@ export class FarcasterProfileService {
     if (error) {
       return null;
     }
-
     return data as ProfileInterface;
   }
 }

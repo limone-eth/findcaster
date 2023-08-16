@@ -3,7 +3,7 @@
 export interface ProfileInterface {
   id: number;
   followers?: number;
-  followings?: number;
+  following?: number;
   username: string;
   display_name: string;
   bio?: string;

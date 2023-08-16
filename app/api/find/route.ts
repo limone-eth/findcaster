@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function POST(res) {
+export async function GET(res) {
   const data = await res.json();
 
   // @todo
