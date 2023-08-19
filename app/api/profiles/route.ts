@@ -19,7 +19,7 @@ export async function GET(req: Request) {
   const poapEventIds = searchParams.getAll('poapEventId');
   // TODO: add support for nftContractAddress
   // const nftContractAddress = searchParams.getAll('nftContractAddress');
-  const limit: number = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 12;
+  const limit: number = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 10;
   const page: number = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 0;
   const orderBy: string = searchParams.get('orderBy') ? searchParams.get('orderBy') : 'id';
   const orderDir: string = searchParams.get('orderDir') ? searchParams.get('orderDir') : 'asc';

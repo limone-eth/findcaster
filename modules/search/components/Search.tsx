@@ -10,7 +10,7 @@ const Search = () => {
   const [profiles, setProfiles] = useState(null);
 
   return (
-    <div className="mt-16">
+    <div className="m-16">
       <SearchForm onResults={(results) => setProfiles(results)} />
       {profiles && profiles.length === 0 && <Text size="xl">No results found</Text>}
       {profiles && profiles.length > 0 && <ResultGrid profiles={profiles} />}

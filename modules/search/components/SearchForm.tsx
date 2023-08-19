@@ -34,7 +34,7 @@ const SearchForm = ({ onResults }) => (
       username: '',
       orderBy: 'id',
       orderDir: 'desc',
-      limit: 12,
+      limit: 10,
       page: 0,
       poapEventIds: '',
     }}
