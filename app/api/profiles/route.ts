@@ -1,13 +1,13 @@
 import { Request } from 'next/dist/compiled/@edge-runtime/primitives';
 import { NextResponse } from 'next/server';
 
-import supabase from '@/app/lib/supabase';
 import { FarcasterProfileService } from '@/models/farcaster/services/FarcasterProfileService';
+import supabaseClient from '@/modules/application/utils/supabaseClient';
 
 export async function GET(req: Request) {
   // Process a GET request
   const { searchParams } = new URL(req.url);
-  const farcasterProfileService = new FarcasterProfileService(supabase);
+  const farcasterProfileService = new FarcasterProfileService(supabaseClient);
   const username = searchParams.get('username');
   if (username) {
     const user = await farcasterProfileService.getByUsername(username);
@@ -29,7 +29,7 @@ export async function GET(req: Request) {
       ${poapEventIds?.length > 0 ? ',poap_events!inner(*)' : ''}
     `;
 
-  const supabaseQuery = supabase.from('profile').select(query);
+  const supabaseQuery = supabaseClient.from('profile').select(query);
 
   if (poapEventIds?.length > 0) {
     supabaseQuery.in('poap_events.id', poapEventIds);
