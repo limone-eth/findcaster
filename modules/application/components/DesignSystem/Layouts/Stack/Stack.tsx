@@ -8,18 +8,15 @@ interface Stack {
   children: any;
   spacing?: 'none' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl' | 'xxxxl';
   alignItems?: 'left' | 'center' | 'right';
-  showDivider?: boolean;
-  width?: 'full' | 'auto';
 }
 
-const Stack = ({ children, spacing = 'm', showDivider = false, alignItems = 'left', width = 'auto' }: Stack) => {
+const Stack = ({ children, spacing = 'm', alignItems = 'left' }: Stack) => {
   const items = findChildrenByRole(children, 'Stack.Item');
   if (!items) {
     return null;
   }
 
-  const stackClassNames = classNames({
-    'divide-y divide-solid divide-gray-150 dark:divide-zinc-800': showDivider,
+  const stackClassNames = classNames('w-full', {
     'space-y-1': spacing === 'xxs',
     'space-y-2': spacing === 'xs',
     'space-y-3': spacing === 's',
@@ -29,7 +26,6 @@ const Stack = ({ children, spacing = 'm', showDivider = false, alignItems = 'lef
     'space-y-10': spacing === 'xxl',
     'space-y-16': spacing === 'xxxl',
     'space-y-20': spacing === 'xxxxl',
-    'w-full': width === 'full',
   });
 
   return children ? (

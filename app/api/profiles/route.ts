@@ -16,6 +16,7 @@ export async function GET(req: Request) {
     }
     return NextResponse.json([user]);
   }
+
   const poapEventIds = searchParams.getAll('poapEventId');
   // TODO: add support for nftContractAddress
   // const nftContractAddress = searchParams.getAll('nftContractAddress');
@@ -28,6 +29,8 @@ export async function GET(req: Request) {
       * 
       ${poapEventIds?.length > 0 ? ',poap_events!inner(*)' : ''}
     `;
+
+  console.log(222, poapEventIds);
 
   const supabaseQuery = supabaseClient.from('profile').select(query);
 

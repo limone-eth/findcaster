@@ -27,6 +27,8 @@
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
+    "debounce": "^1.2.1",
+    "downshift": "^8.1.0",
     "encoding": "^0.1.13",
     "formik": "^2.4.2",
     "framer-motion": "^10.12.18",
