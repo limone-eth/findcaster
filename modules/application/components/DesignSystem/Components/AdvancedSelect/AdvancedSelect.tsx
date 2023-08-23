@@ -144,13 +144,13 @@ const AdvancedSelect = ({
       </div>
       <ul {...getMenuProps()} className="relative" id="downshift" aria-labelledby="downshift">
         {status !== 'disabled' && isOpen && (options?.length > 0 || inputValue?.length > 0) ? (
-          <div className="absolute z-10 mt-2 w-full rounded-lg border border-gray-200 bg-gray-100 shadow-xl shadow-gray-900/10 dark:border-zinc-700 dark:bg-zinc-800 dark:shadow-black/50">
+          <div className="absolute z-10 mt-2 w-full rounded-lg border border-violet-700 bg-violet-600 shadow-xl shadow-violet-900/80">
             <div className="max-h-52 overflow-y-auto">
               {options.map((option, index) => {
                 const isSelectedItem = selectedItem?.name === option?.name;
                 const isHighlighted = highlightedIndex === index;
                 const classes = classNames('cursor-pointer', {
-                  'bg-gray-200 dark:bg-zinc-700': isHighlighted || isSelectedItem,
+                  'bg-violet-800': isHighlighted || isSelectedItem,
                 });
 
                 return (
@@ -166,9 +166,7 @@ const AdvancedSelect = ({
               )}
             </div>
             {footer && (
-              <div className="border-t border-gray-300 dark:border-zinc-700">
-                {cloneElement(footer, { inputValue: inputValue || '' })}
-              </div>
+              <div className="border-t border-gray-300">{cloneElement(footer, { inputValue: inputValue || '' })}</div>
             )}
           </div>
         ) : null}

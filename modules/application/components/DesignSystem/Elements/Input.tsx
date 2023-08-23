@@ -46,10 +46,11 @@ const Input = forwardRef<HTMLInputElement, Input>(
     ref
   ) => {
     const inputClassNames = classNames(
-      'px-3 w-full text-primary-100 bg-white placeholder-gray-300 focus:outline-none',
+      'px-3 w-full text-white bg-violet-600 placeholder-gray-300 rounded-xl focus:outline-none',
       {
         'border-0 pl-0 focus:ring-transparent': theme === 'bare',
-        'focus:ring-transparent focus:border-primary-500': status !== 'invalid' && theme === 'default',
+        'border-1 focus:ring-transparent border-violet-700 focus:border-violet-800':
+          status !== 'invalid' && theme === 'default',
         'border-1 border-red-600 focus:border-red-600 focus:ring-transparent':
           status === 'invalid' && theme === 'default',
         'text-xl leading-tight tracking-tight h-20': size === 'xl',
