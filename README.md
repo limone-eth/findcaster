@@ -2,7 +2,7 @@
 
 ### 🦇 Signal
 
-We're looking for feedback on our web3 socials discovery tool, and ideas on what type of queries would be useful to you!
+We are looking for users active on farcaster right now who would want to test out ways to find people to follow on Farcaster
 
 ## Project Overview
 
