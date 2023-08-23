@@ -37,4 +37,5 @@ people to connect with.
 To get started, follow these simple steps:
 
 1. Run `yarn install` to install all the required dependencies.
-2. Then execute `yarn dev` to launch the application.
+2. Rename `.env.example` to `.env.local` and configure your variables with the proper credentials.
+3. Then execute `yarn dev` to launch the application.
