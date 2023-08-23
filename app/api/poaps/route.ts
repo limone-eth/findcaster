@@ -20,5 +20,5 @@ export async function GET(req: Request) {
   if (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
-  return NextResponse.json(data);
+  return NextResponse.json(data.map((event) => ({ ...event, poap_url: `https://poap.gallery/event/${event.id}` })));
 }
