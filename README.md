@@ -21,8 +21,7 @@ the [Farcaster Indexer](https://github.com/limone-eth/farcaster-indexer) which i
 
 ### On-chain data integrations
 
-We are enriching users' profiles with data about their POAPs, NFTs and token transfers. In the future we will add more onchain data sources in
-the future. We also plan to have a recommendation system based on the data we have so that we can suggest users the best
+We are enriching users' profiles with data about their POAPs, NFTs and token transfers. In the future we will add more onchain data sources. We also plan to have a recommendation system based on the data we have so that we can suggest users the best
 people to connect with.
 
 ### Tech stack
