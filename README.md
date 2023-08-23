@@ -26,10 +26,11 @@ people to connect with.
 
 ### Tech stack
 
-- NextJS
-- Tailwind
-- Supabase
+- [NextJS](https://nextjs.org/)
+- [Tailwind](https://tailwindcss.com/)
+- [Supabase](https://supabase.com/)
 - Typescript
+- [Airstack](https://airstack.xyz/)
 
 ## Getting Started
 
