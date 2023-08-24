@@ -20,7 +20,7 @@ export async function GET(req: Request) {
   const poapEventIds = searchParams.getAll('poapEventId');
 
   const interest = searchParams.getAll('interest');
-  const limit: number = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 10;
+  const limit: number = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 9;
   const page: number = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 0;
   const orderBy: string = searchParams.get('orderBy') ? searchParams.get('orderBy') : 'id';
   const orderDir: string = searchParams.get('orderDir') ? searchParams.get('orderDir') : 'asc';
