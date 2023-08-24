@@ -46,7 +46,7 @@ export class FarcasterProfileService {
     if (interests?.length > 0) {
       const { data, error } = await this.supabaseClient
         .rpc('get_profiles_by_interest', {
-          interest: interests.map((i) => `'${i}'`).join(' & '),
+          interest: interests.map((i) => `'${i}'`).join(' | '),
           poap_event_ids: poapEventIds ?? [],
         })
         .range(page * limit, (page + 1) * limit - 1)
