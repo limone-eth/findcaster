@@ -12,7 +12,6 @@ const SearchResultsList = ({ poaps, interests }) => {
       {items?.length > 0 && (
         <div>
           <InfiniteScroll
-            mode="manual"
             style={{ overflowY: 'hidden' }} // Should not need this but for some reason I do?!
             dataLength={items.length}
             next={handleLoadMore}
