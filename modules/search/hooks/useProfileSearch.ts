@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { EVENT_SEARCH_STARTED, trackEvent } from '@/models/application/services/TrackingService';
 import { ProfileInternalApiService } from '@/models/profiles/services/internalApi/ProfileInternalApiService';
 
 const useProfileSearch = () => {
@@ -8,6 +9,8 @@ const useProfileSearch = () => {
 
   const handleSearch = async (poaps, interests) => {
     if (poaps?.length > 0 || interests?.length > 0) {
+      trackEvent(EVENT_SEARCH_STARTED);
+
       setIsLoading(true);
       const service = new ProfileInternalApiService();
       const results = await service.getProfiles(
