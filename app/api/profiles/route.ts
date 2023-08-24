@@ -18,12 +18,29 @@ export async function GET(req: Request) {
   }
 
   const poapEventIds = searchParams.getAll('poapEventId');
-  // TODO: add support for nftContractAddress
-  // const nftContractAddress = searchParams.getAll('nftContractAddress');
+
+  const interest = searchParams.getAll('interest');
   const limit: number = searchParams.get('limit') ? parseInt(searchParams.get('limit'), 10) : 10;
   const page: number = searchParams.get('page') ? parseInt(searchParams.get('page'), 10) : 0;
   const orderBy: string = searchParams.get('orderBy') ? searchParams.get('orderBy') : 'id';
   const orderDir: string = searchParams.get('orderDir') ? searchParams.get('orderDir') : 'asc';
+  if (interest?.length > 0) {
+    const { data, error } = await supabaseClient
+      .rpc('get_profiles_by_interest', {
+        interest: interest.map((i) => `'${i}'`).join(' | '),
+        poap_event_ids: poapEventIds ?? [],
+      })
+      .range(page * limit, (page + 1) * limit - 1)
+      .order(orderBy, { ascending: orderDir === 'asc', nullsFirst: false })
+      .limit(limit);
+    if (error) {
+      return NextResponse.json({ error }, { status: 500 });
+    }
+    return NextResponse.json(data);
+  }
+
+  // TODO: add support for nftContractAddress
+  // const nftContractAddress = searchParams.getAll('nftContractAddress');
 
   const query = `
       * 

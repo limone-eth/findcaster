@@ -1,29 +1,39 @@
-import { useState } from 'react';
+import useSWRInfinite from 'swr/infinite';
 
-import { EVENT_SEARCH_STARTED, trackEvent } from '@/models/application/services/TrackingService';
-import { ProfileInternalApiService } from '@/models/profiles/services/internalApi/ProfileInternalApiService';
+import { getProfilesApiEndpoint } from '@/models/profiles/services/internalApi/ProfileInternalApiService';
+import { fetchFromAuthedApi } from '@/modules/common/utils/fetcher';
 
-const useProfileSearch = () => {
-  const [profiles, setProfiles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+const LIMIT = 10;
 
-  const handleSearch = async (poaps) => {
-    if (poaps?.length > 0) {
-      trackEvent(EVENT_SEARCH_STARTED);
+const getSwrKey = (pageIndex, previousPageData, poaps, interests) =>
+  getProfilesApiEndpoint(
+    poaps?.map((poap) => poap.id),
+    interests,
+    pageIndex,
+    LIMIT
+  );
 
-      setIsLoading(true);
-      const service = new ProfileInternalApiService();
-      const results = await service.getProfiles(poaps.map((poapsItem) => poapsItem.id));
-
-      setProfiles(results || []);
-
-      setIsLoading(false);
-    } else {
-      setProfiles([]);
+const useProfileSearch = (poaps, interests) => {
+  const { data, size, setSize } = useSWRInfinite(
+    (...args) => getSwrKey(...args, poaps, interests),
+    fetchFromAuthedApi,
+    {
+      revalidateOnFocus: true,
     }
+  );
+
+  const handleLoadMore = async () => {
+    await setSize(size + 1);
   };
 
-  return { profiles, isLoading, handleSearch };
+  const lastItemsRetrieved = data?.length > 0 ? data[data.length - 1] : null;
+
+  return {
+    items: data ? [].concat(...data) : [],
+    hasMore: (lastItemsRetrieved as any)?.length === LIMIT,
+    handleLoadMore,
+    isLoading: data === undefined,
+  };
 };
 
 export default useProfileSearch;

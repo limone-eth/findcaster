@@ -9,7 +9,10 @@
   "homepage": "https://github.com/limone-eth/findcaster#readme",
   "license": "MIT",
   "keywords": [
-    "Farcaster"
+    "Farcaster",
+    "Web3",
+    "Social",
+    "Recommendations"
   ],
   "scripts": {
     "dev": "next dev",
@@ -37,7 +40,10 @@
     "next-plausible": "^3.10.2",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "swr": "^2.2.1",
     "yup": "^1.2.0"
   },
   "devDependencies": {

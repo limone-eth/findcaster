@@ -20,6 +20,7 @@ interface Input {
   readOnly?: boolean;
   onChange?: any;
   onBlur?: any;
+  onKeyDown?: any;
   onFocus?: any;
 }
 
@@ -40,6 +41,7 @@ const Input = forwardRef<HTMLInputElement, Input>(
       onChange,
       onBlur,
       onFocus,
+      onKeyDown,
       theme = 'default',
       readOnly = false,
     }: Input,
@@ -82,6 +84,7 @@ const Input = forwardRef<HTMLInputElement, Input>(
           disabled={status === 'disabled'}
           maxLength={maxLength}
           onBlur={onBlur}
+          onKeyDown={onKeyDown}
           onFocus={onFocus}
           onChange={(e) => {
             onChange && onChange(e);

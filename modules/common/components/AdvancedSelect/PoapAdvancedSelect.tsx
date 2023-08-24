@@ -7,7 +7,7 @@ const PoapAdvancedSelect = ({ onSelect, onChange, footer, status, value, size, s
 
   return (
     <AdvancedSelect
-      placeholder="Search by POAP..."
+      placeholder="Search by POAP e.g. NFT Denver..."
       options={options || []}
       renderOption={(option) => <PoapSearchResultItem item={option} />}
       onInputChange={handleSearch}
