@@ -154,7 +154,7 @@ const AdvancedSelect = ({
                 });
 
                 return (
-                  <div {...getItemProps({ key: index, index, item: option })} className={classes}>
+                  <div key={option.id || option.name} {...getItemProps({ index, item: option })} className={classes}>
                     {renderOption(option)}
                   </div>
                 );
