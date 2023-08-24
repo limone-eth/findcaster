@@ -26,10 +26,10 @@ const ProfileCard = ({ profile }: { profile: ProfileInterface }) => (
           </div>
         </div>
         <div className="flex items-center justify-center space-x-4">
-          <div className="inline-block rounded-2xl bg-violet-700 p-3 text-sm font-semibold text-white">
+          <div className="inline-block rounded-xl bg-violet-600 p-3 text-sm font-semibold text-white">
             {profile.followers} followers
           </div>
-          <div className="inline-block rounded-2xl bg-violet-700 p-3 text-sm font-semibold text-white">
+          <div className="inline-block rounded-xl bg-violet-600 p-3 text-sm font-semibold text-white">
             {profile.following} following
           </div>
         </div>
