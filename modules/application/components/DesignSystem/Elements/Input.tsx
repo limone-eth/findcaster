@@ -51,7 +51,7 @@ const Input = forwardRef<HTMLInputElement, Input>(
       'px-3 w-full text-white bg-violet-700 placeholder-violet-400 rounded-xl focus:outline-none',
       {
         'border-0 pl-0 focus:ring-transparent': theme === 'bare',
-        'border-1 focus:ring-transparent border-violet-800 focus:border-violet-900':
+        'border-1 focus:ring-transparent border-violet-800 focus:border-purple-300':
           status !== 'invalid' && theme === 'default',
         'border-1 border-red-600 focus:border-red-600 focus:ring-transparent':
           status === 'invalid' && theme === 'default',
