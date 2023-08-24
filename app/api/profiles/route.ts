@@ -30,8 +30,6 @@ export async function GET(req: Request) {
       ${poapEventIds?.length > 0 ? ',poap_events!inner(*)' : ''}
     `;
 
-  console.log(222, poapEventIds);
-
   const supabaseQuery = supabaseClient.from('profile').select(query);
 
   if (poapEventIds?.length > 0) {
