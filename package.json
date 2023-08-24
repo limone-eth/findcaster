@@ -9,7 +9,10 @@
   "homepage": "https://github.com/limone-eth/findcaster#readme",
   "license": "MIT",
   "keywords": [
-    "Farcaster"
+    "Farcaster",
+    "Web3",
+    "Social",
+    "Recommendations"
   ],
   "scripts": {
     "dev": "next dev",
@@ -32,6 +35,7 @@
     "encoding": "^0.1.13",
     "formik": "^2.4.3",
     "framer-motion": "^10.16.1",
+    "mixpanel-browser": "^2.47.0",
     "next": "^13.4.19",
     "next-plausible": "^3.10.2",
     "react": "^18.2.0",
