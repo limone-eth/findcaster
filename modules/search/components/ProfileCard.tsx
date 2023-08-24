@@ -15,11 +15,11 @@ const ProfileCard = ({ profile }: { profile: ProfileInterface }) => (
             src={profile.avatar_url}
             alt={profile.display_name}
           />
-          <div className="mb-5 mt-2 flex flex-col space-y-1">
+          <div className="mb-5 mt-2 flex flex-col space-y-2">
             <Text size="xxl" fontWeight="bold" textAlign="center">
               {profile.display_name}
             </Text>
-            <Text textAlign="center" color="gray-900" fontWeight="semibold">
+            <Text textAlign="center" color="gray-900" fontWeight="normal">
               @{profile.username}
             </Text>
             {profile.bio && <Text textAlign="center">{profile.bio}</Text>}
