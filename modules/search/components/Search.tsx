@@ -15,7 +15,7 @@ const Search = () => {
 
   return (
     <div className="m-16">
-      <div className="m-auto mb-10 w-1/2">
+      <div className="m-auto mb-10 md:w-1/3">
         <div className="flex flex-col gap-3">
           <SearchInterestsInput
             onSelect={(item) => {

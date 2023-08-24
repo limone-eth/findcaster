@@ -48,7 +48,7 @@ const Input = forwardRef<HTMLInputElement, Input>(
     ref
   ) => {
     const inputClassNames = classNames(
-      'px-3 w-full text-white bg-violet-700 placeholder-gray-300 rounded-xl focus:outline-none',
+      'px-3 w-full text-white bg-violet-700 placeholder-violet-400 rounded-xl focus:outline-none',
       {
         'border-0 pl-0 focus:ring-transparent': theme === 'bare',
         'border-1 focus:ring-transparent border-violet-800 focus:border-violet-900':
