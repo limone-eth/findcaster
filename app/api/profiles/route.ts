@@ -16,6 +16,7 @@ export async function GET(req: Request) {
     }
     return NextResponse.json([user]);
   }
+
   const poapEventIds = searchParams.getAll('poapEventId');
 
   const interest = searchParams.get('interest');
