@@ -3,7 +3,7 @@ import classNames from 'classnames';
 interface Heading {
   children: any;
   spacing?: 'none' | 's' | 'm' | 'l' | 'xl';
-  size?: 'inherit' | 's' | 'm' | 'l' | 'xl' | 'xxl';
+  size?: 'inherit' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'xxxl';
   textAlign?: 'left' | 'center' | 'right';
   color?: 'inherit' | 'white' | 'black';
   level?: 0 | 1 | 2 | 3 | 4;
@@ -14,7 +14,7 @@ const Heading = ({
   children,
   spacing = 'none',
   level = 2,
-  color = 'black',
+  color = 'white',
   textAlign = 'left',
   fontFamily = 'sans',
   size = 'm',
@@ -39,12 +39,13 @@ const Heading = ({
     'text-xl': size === 'l',
     'text-2xl': size === 'xl',
     'text-3xl': size === 'xxl',
+    'text-6xl': size === 'xxxl',
 
     'leading-tight tracking-tight': level === 0 || level === 1 || level === 2,
     'leading-snug': level === 3 || level === 4,
 
     'text-white': color === 'white',
-    'text-gray-900 dark:text-white': color === 'black',
+    'text-gray-900': color === 'black',
   });
 
   let Tag;

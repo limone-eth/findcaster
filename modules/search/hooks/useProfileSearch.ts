@@ -3,7 +3,7 @@ import useSWRInfinite from 'swr/infinite';
 import { getProfilesApiEndpoint } from '@/models/profiles/services/internalApi/ProfileInternalApiService';
 import { fetchFromAuthedApi } from '@/modules/common/utils/fetcher';
 
-const LIMIT = 10;
+const LIMIT = 9;
 
 const getSwrKey = (pageIndex, previousPageData, poaps, interests) =>
   getProfilesApiEndpoint(
