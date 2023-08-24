@@ -19,7 +19,7 @@ const SearchResultsList = ({ poaps, interests }) => {
             loader={<Spinner />}
           >
             <div className="m-auto w-full px-4 md:max-w-6xl md:px-0">
-              <div className="grid gap-3 py-12 md:grid-cols-3 md:gap-6">
+              <div className="grid gap-3 py-12 md:grid-cols-3 md:gap-10">
                 {items.map((profile) => (
                   <ProfileCard key={profile.id} profile={profile} />
                 ))}

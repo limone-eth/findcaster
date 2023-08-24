@@ -38,6 +38,7 @@
     "mixpanel-browser": "^2.47.0",
     "next": "^13.4.19",
     "next-plausible": "^3.10.2",
+    "numeral": "^2.0.6",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-device-detect": "^2.2.3",

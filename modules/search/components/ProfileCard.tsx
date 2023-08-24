@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import numeral from 'numeral';
 
 import { getWarpcastUrl } from '@/models/application/services/UrlService';
 import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
@@ -25,12 +26,22 @@ const ProfileCard = ({ profile }: { profile: ProfileInterface }) => (
             {profile.bio && <Text textAlign="center">{profile.bio}</Text>}
           </div>
         </div>
-        <div className="flex items-center justify-center space-x-4">
-          <div className="inline-block rounded-xl bg-violet-600 p-3 text-sm font-semibold text-white">
-            {profile.followers} followers
+        <div className="flex items-center justify-center space-x-8">
+          <div className="flex flex-col items-center space-y-1">
+            <div className="inline-block w-24 rounded-xl bg-violet-600 p-3 text-center text-xl font-semibold text-white">
+              {numeral(profile.followers || 0).format('0,0a')}
+            </div>
+            <Text size="s" fontWeight="semibold">
+              Followers
+            </Text>
           </div>
-          <div className="inline-block rounded-xl bg-violet-600 p-3 text-sm font-semibold text-white">
-            {profile.following} following
+          <div className="flex flex-col items-center space-y-1">
+            <div className="inline-block w-24 rounded-xl bg-violet-600 p-3 text-center text-xl font-semibold text-white">
+              {numeral(profile.following || 0).format('0,0a')}
+            </div>
+            <Text size="s" fontWeight="semibold">
+              Following
+            </Text>
           </div>
         </div>
       </div>
