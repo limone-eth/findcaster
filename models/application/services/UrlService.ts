@@ -9,3 +9,5 @@ export const createUrl = (url, params = []): string => {
 
   return url;
 };
+
+export const getWarpcastUrl = (username: string): string => `https://warpcast.com/${username}`;
