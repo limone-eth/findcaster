@@ -1,4 +1,5 @@
 import { AbstractInternalApiService } from '@/models/application/services/internalApi/AbstractInternalApiService';
+import { EVENT_SEARCH_STARTED, trackEvent } from '@/models/application/services/TrackingService';
 import { createUrl } from '@/models/application/services/UrlService';
 
 export class ProfileInternalApiService extends AbstractInternalApiService {
@@ -17,4 +18,30 @@ export class ProfileInternalApiService extends AbstractInternalApiService {
 
     return response;
   }
+}
+
+export function getProfilesApiEndpoint(
+  poapEventIds: number[],
+  interests: string[],
+  page = 0,
+  limit = 10,
+  orderBy = 'id',
+  orderDir = 'desc'
+) {
+  const params = [
+    ...poapEventIds.map((poapEventId) => `poapEventId=${poapEventId}`),
+    ...interests.map((interest) => `interest=${interest}`),
+  ];
+
+  trackEvent(EVENT_SEARCH_STARTED, {
+    poapEventIds,
+    interests,
+  });
+
+  params.push(`page=${page}`);
+  params.push(`limit=${limit}`);
+  params.push(`orderBy=${orderBy}`);
+  params.push(`orderDir=${orderDir}`);
+
+  return createUrl(`/profiles/`, params);
 }

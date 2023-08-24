@@ -1,31 +1,23 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/20/solid';
 
-import { Badge, Text } from '@/modules/application/components/DesignSystem';
-import { InterestAdvancedSelect, PoapAdvancedSelect } from '@/modules/common/components/AdvancedSelect';
-import ResultGrid from '@/modules/search/components/ResultGrid';
-import useProfileSearch from '@/modules/search/hooks/useProfileSearch';
+import { Badge } from '@/modules/application/components/DesignSystem';
+import { PoapAdvancedSelect } from '@/modules/common/components/AdvancedSelect';
+import SearchInterestsInput from '@/modules/search/components/SearchInterestsInput';
+import SearchResultsList from '@/modules/search/components/SearchResultsList';
 
 const Search = () => {
   const [poaps, setPoaps] = useState([]);
   const [interests, setInterests] = useState([]);
 
-  const { profiles, handleSearch } = useProfileSearch();
-
-  useEffect(() => {
-    (async () => {
-      await handleSearch(poaps, interests);
-    })();
-  }, [poaps, interests]);
-
   return (
     <div className="m-16">
       <div className="m-auto mb-10 w-1/2">
         <div className="flex flex-col gap-3">
-          <InterestAdvancedSelect
+          <SearchInterestsInput
             onSelect={(item) => {
               setInterests(interests.concat(item));
             }}
@@ -51,12 +43,12 @@ const Search = () => {
               </div>
             ))}
             {interests?.map((interest) => (
-              <div key={interest.id} className="mb-3 mr-3 inline-block">
+              <div key={interest} className="mb-3 mr-3 inline-block">
                 <Badge color="white" size="s">
-                  {interest.name}
+                  {interest}
                   <Badge.Icon
                     icon={<XMarkIcon className="w-4" />}
-                    onClick={() => setInterests(interests.filter((_interest) => _interest.id !== interest.id))}
+                    onClick={() => setInterests(interests.filter((_interest) => _interest !== interest))}
                   />
                 </Badge>
               </div>
@@ -64,12 +56,7 @@ const Search = () => {
           </div>
         )}
       </div>
-      {profiles && profiles.length === 0 && (
-        <Text size="xl" textAlign="center" fontFamily="mono" fontWeight="bold">
-          No results found
-        </Text>
-      )}
-      {profiles && profiles.length > 0 && <ResultGrid profiles={profiles} />}
+      {(poaps?.length > 0 || interests?.length > 0) && <SearchResultsList poaps={poaps} interests={interests} />}
     </div>
   );
 };
