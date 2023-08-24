@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   const { data, error } = await supabaseClient
     .from('poap_events')
     .select('id, event_name, event_url, image_url')
-    .textSearch('event_name', `${name}:*`)
+    .textSearch('event_name', name.split(' ').join(' & '))
     .range(page * limit, (page + 1) * limit - 1)
     .limit(limit);
   if (error) {
