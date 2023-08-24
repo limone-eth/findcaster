@@ -9,7 +9,10 @@
   "homepage": "https://github.com/limone-eth/findcaster#readme",
   "license": "MIT",
   "keywords": [
-    "Farcaster"
+    "Farcaster",
+    "Web3",
+    "Social",
+    "Recommendations"
   ],
   "scripts": {
     "dev": "next dev",
