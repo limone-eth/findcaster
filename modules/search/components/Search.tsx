@@ -15,8 +15,8 @@ const Search = () => {
 
   return (
     <div className="m-16">
-      <div className="m-auto mb-10 w-1/2">
-        <div className="flex flex-col gap-3">
+      <div className="m-auto mb-10 md:w-1/2">
+        <div className="grid gap-4 md:grid-cols-2">
           <SearchInterestsInput
             onSelect={(item) => {
               setInterests(interests.concat(item));
