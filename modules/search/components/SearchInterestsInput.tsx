@@ -19,12 +19,12 @@ const SearchInterestsInput = ({ onSelect }) => {
   };
 
   return (
-    <Input
-      placeholder="Search by interests e.g. NFT, blockchain, web3..."
-      onKeyDown={handleKeyDown}
-      onChange={handleChange}
-      value={interest}
-    />
+    <div>
+      <label htmlFor="large-input" className="mb-2 block text-sm font-medium text-white dark:text-white">
+        Keywords people casted
+      </label>
+      <Input placeholder="NFT, sports, gaming..." onKeyDown={handleKeyDown} onChange={handleChange} value={interest} />
+    </div>
   );
 };
 
