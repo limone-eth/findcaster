@@ -6,19 +6,24 @@ const PoapAdvancedSelect = ({ onSelect, onChange, footer, status, value, size, s
   const { options, handleSearch } = usePoapsSearch();
 
   return (
-    <AdvancedSelect
-      placeholder="Search by POAP e.g. NFT Denver..."
-      options={options || []}
-      renderOption={(option) => <PoapSearchResultItem item={option} />}
-      onInputChange={handleSearch}
-      onSelect={onSelect}
-      onChange={onChange}
-      footer={footer}
-      status={status}
-      size={size}
-      value={value}
-      shouldCloseOnSelect={shouldCloseOnSelect}
-    />
+    <div>
+      <label htmlFor="large-input" className="mb-2 block text-sm font-medium text-white dark:text-white">
+        POAPs people collected
+      </label>
+      <AdvancedSelect
+        placeholder="rAAVE Lisbon, ETHDenver 2022..."
+        options={options || []}
+        renderOption={(option) => <PoapSearchResultItem item={option} />}
+        onInputChange={handleSearch}
+        onSelect={onSelect}
+        onChange={onChange}
+        footer={footer}
+        status={status}
+        size={size}
+        value={value}
+        shouldCloseOnSelect={shouldCloseOnSelect}
+      />
+    </div>
   );
 };
 
