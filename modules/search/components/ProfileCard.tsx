@@ -61,7 +61,7 @@ const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface
           </div>
         </div>
         <hr />
-        <div className="mt-4 flex flex-auto flex-wrap">
+        <div className="mt-4 flex">
           {profile.matching_poaps?.length > 0 &&
             profile.matching_poaps.map((poap) => (
               <Link href={getPoapEventUrl(poap.id)} target="_blank" rel="noreferrer">
