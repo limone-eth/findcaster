@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { MatchingCastInterface, MatchingPoapInterface } from '@/app/api/profiles/utils';
 
 export interface ProfileInterface {
   id: number;
@@ -10,4 +11,6 @@ export interface ProfileInterface {
   avatar_url?: string;
   registered_at: number;
   updated_at: number;
+  matching_casts: MatchingCastInterface[];
+  matching_poaps?: MatchingPoapInterface[];
 }
