@@ -9,7 +9,7 @@ const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface
   const matchingCasts =
     searchedInterests?.length > 0 && profile.matching_casts?.length > 0
       ? profile.matching_casts
-          .filter((c) => searchedInterests.some((castText) => c.text.toLowerCase().includes(castText.toLowerCase())))
+          .filter((c) => searchedInterests.some((castText) => c.text?.toLowerCase().includes(castText.toLowerCase())))
           .map((cast) => {
             const matchingInterests = searchedInterests.filter((castText) =>
               cast.text.toLowerCase().includes(castText.toLowerCase())
@@ -61,7 +61,7 @@ const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface
           </div>
         </div>
         <hr />
-        <div className="mt-4 flex">
+        <div className="mx-4 mt-4 flex flex-auto flex-wrap">
           {profile.matching_poaps?.length > 0 &&
             profile.matching_poaps.map((poap) => (
               <Link href={getPoapEventUrl(poap.id)} target="_blank" rel="noreferrer">
