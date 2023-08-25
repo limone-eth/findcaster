@@ -11,3 +11,6 @@ export const createUrl = (url, params = []): string => {
 };
 
 export const getWarpcastUrl = (username: string): string => `https://warpcast.com/${username}`;
+export const getWarpcastCastUrl = (username: string, castHash): string =>
+  `https://warpcast.com/${username}/${castHash}`;
+export const getPoapEventUrl = (eventId: string): string => `https://poap.gallery/event/${eventId}`;
