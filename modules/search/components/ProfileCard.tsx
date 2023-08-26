@@ -60,24 +60,29 @@ const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface
             </Text>
           </div>
         </div>
-        <hr />
-        <div className="mx-4 mt-4 flex flex-auto flex-wrap">
+      </div>
+      <div className="mt-5">
+        <div className="flex flex-auto flex-wrap rounded-xl bg-violet-600 p-2">
           {profile.matching_poaps?.length > 0 &&
             profile.matching_poaps.map((poap) => (
-              <Link href={getPoapEventUrl(poap.id)} target="_blank" rel="noreferrer">
-                <div key={poap.id} className="mb-3 mr-3 inline-block">
-                  <Badge color="green" size="xs">
-                    {/* Link to poap https://poap.gallery/event/poap.id */}
+              <Link key={poap.id} href={getPoapEventUrl(poap.id)} target="_blank" rel="noreferrer">
+                <div className="mb-1 mr-1 inline-block">
+                  <Badge color="purple" size="xs">
                     {poap.name}
                   </Badge>
                 </div>
               </Link>
             ))}
           {matchingCasts?.length > 0 &&
-            matchingCasts.map((cast, index) => (
-              <Link href={getWarpcastCastUrl(profile.username, cast.hash)} target="_blank" rel="noreferrer">
-                <div key={index} className="mb-3 mr-3 inline-block">
-                  <Badge color="blue" size="xs">
+            matchingCasts.map((cast) => (
+              <Link
+                key={cast.hash}
+                href={getWarpcastCastUrl(profile.username, cast.hash)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className="mb-1 mr-1 inline-block">
+                  <Badge color="purple" size="xs">
                     {cast.matchingInterests[0]}
                   </Badge>
                 </div>

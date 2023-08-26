@@ -36,7 +36,7 @@ interface Badge {
   children: any;
   size?: 'xs' | 's' | 'm' | 'l';
   theme?: 'solid' | 'ghost' | 'bare';
-  color?: 'red' | 'white' | 'yellow' | 'green' | 'gray' | 'blue';
+  color?: 'red' | 'white' | 'purple' | 'green' | 'gray' | 'blue';
   transform?: 'uppercase' | 'lowercase' | 'capitalize';
   lineClamp?: boolean;
 }
@@ -54,37 +54,30 @@ const Badge = React.forwardRef<any, any>(
       'px-3 py-1 text-lg leading-tight space-x-2 rounded-lg font-medium': size === 'l',
 
       // theme solid
-      'bg-gray-800 text-gray-200 dark:bg-zinc-100 dark:text-gray-700 border-gray-800 dark:border-zinc-100':
-        color === 'white' && theme === 'solid',
-      'bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-gray-200 border-gray-100 dark:border-zinc-800':
-        color === 'gray' && theme === 'solid',
-      'text-green-800 bg-green-50 dark:bg-lime-900 dark:text-lime-500 border-green-100 dark:border-lime-900':
-        color === 'green' && theme === 'solid',
-      'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-500 border-red-100 dark:border-red-900':
-        color === 'red' && theme === 'solid',
-      'bg-blue-50 text-blue-500 dark:bg-blue-900 dark:text-blue-100 border-blue-50 dark:border-blue-900':
-        color === 'blue' && theme === 'solid',
-      'bg-yellow-200 text-yellow-800 dark:bg-yellow-dark-900 dark:text-yellow-dark-500 border-yellow-50 dark:border-yellow-dark-900':
-        color === 'yellow' && theme === 'solid',
+      'bg-gray-800 text-gray-200 border-gray-800': color === 'white' && theme === 'solid',
+      'bg-gray-100 text-gray-600 border-gray-100': color === 'gray' && theme === 'solid',
+      'text-green-800 bg-green-50 border-green-100': color === 'green' && theme === 'solid',
+      'bg-red-100 text-red-700 border-red-100': color === 'red' && theme === 'solid',
+      'bg-blue-50 text-blue-500 border-blue-50': color === 'blue' && theme === 'solid',
+      'bg-violet-300 text-violet-900 border-violet-300': color === 'purple' && theme === 'solid',
 
       // theme ghost
       'bg-transparent': theme === 'ghost',
-      'border-gray-500 text-gray-700 dark:border-zinc-400 dark:text-gray-200': color === 'white' && theme === 'ghost',
-      'border-gray-300 dark:border-zinc-600 text-gray-500 dark:text-gray-200': color === 'gray' && theme === 'ghost',
-      'border-green-700 dark:border-lime-500 text-green-700 dark:text-lime-500': color === 'green' && theme === 'ghost',
-      'border-red-600 dark:border-red-500 text-red-600 dark:text-red-500': color === 'red' && theme === 'ghost',
-      'border-yellow-700 dark:border-yellow-dark-400 text-yellow-700 dark:text-yellow-dark-400':
-        color === 'yellow' && theme === 'ghost',
-      'border-blue-500 dark:border-blue-400 text-blue-500 dark:text-blue-400': color === 'blue' && theme === 'ghost',
+      'border-gray-500 text-gray-700': color === 'white' && theme === 'ghost',
+      'border-gray-300 text-gray-500': color === 'gray' && theme === 'ghost',
+      'border-green-700 text-green-700': color === 'green' && theme === 'ghost',
+      'border-red-600 text-red-600': color === 'red' && theme === 'ghost',
+      'border-violet-700 text-violet-700': color === 'purple' && theme === 'ghost',
+      'border-blue-500 text-blue-500': color === 'blue' && theme === 'ghost',
 
       // theme bare
       'bg-transparent border-transparent px-0': theme === 'bare',
-      'text-gray-700 dark:text-gray-100': color === 'white' && theme === 'bare',
-      'text-gray-500 dark:text-gray-300': color === 'gray' && theme === 'bare',
-      'text-green-600 dark:text-lime-500': color === 'green' && theme === 'bare',
-      'text-red-800 dark:text-pink-800': color === 'red' && theme === 'bare',
-      'text-blue-500 dark:text-blue-400': color === 'blue' && theme === 'bare',
-      'text-yellow-700 dark:text-yellow-dark-400': color === 'yellow' && theme === 'bare',
+      'text-gray-700': color === 'white' && theme === 'bare',
+      'text-gray-500': color === 'gray' && theme === 'bare',
+      'text-green-600': color === 'green' && theme === 'bare',
+      'text-red-800': color === 'red' && theme === 'bare',
+      'text-blue-500': color === 'blue' && theme === 'bare',
+      'text-violet-700': color === 'purple' && theme === 'bare',
 
       // transforms
       uppercase: transform === 'uppercase',
