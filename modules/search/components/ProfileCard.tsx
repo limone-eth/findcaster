@@ -64,7 +64,7 @@ const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface
       <div className="mt-5">
         <div className="flex flex-auto flex-wrap rounded-xl bg-violet-600 p-2">
           {profile.matching_poaps?.length > 0 &&
-            profile.matching_poaps.map((poap) => (
+            profile.matching_poaps.slice(0, 5).map((poap) => (
               <Link key={poap.id} href={getPoapEventUrl(poap.id)} target="_blank" rel="noreferrer">
                 <div className="mb-1 mr-1 inline-block">
                   <Badge color="purple" size="xs">
@@ -74,7 +74,7 @@ const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface
               </Link>
             ))}
           {matchingCasts?.length > 0 &&
-            matchingCasts.map((cast) => (
+            matchingCasts.slice(0, 5).map((cast) => (
               <Link
                 key={cast.hash}
                 href={getWarpcastCastUrl(profile.username, cast.hash)}

@@ -22,7 +22,7 @@ const mapThemeColor = {
     gray: 'bg-gray-150 hover:bg-gray-300 disabled:bg-gray-300/80 disabled:text-gray-400 focus:shadow-outline',
   },
   ghost: {
-    default: `bg-transparent border border-primary-800 text-primary-50 shadow-special`,
+    default: `bg-transparent border border-violet-800 text-primary-50 shadow-special`,
     red: `hover:text-red-400 text-red-500 border-red-500
     hover:border-red-400 focus:shadow-outline-danger`,
     green: `text-green-500 border-green-500 hover:border-green-600 focus:bg-green-500 focus:shadow-outline-danger`,

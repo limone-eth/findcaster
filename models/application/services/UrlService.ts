@@ -14,3 +14,5 @@ export const getWarpcastUrl = (username: string): string => `https://warpcast.co
 export const getWarpcastCastUrl = (username: string, castHash): string =>
   `https://warpcast.com/${username}/${castHash}`;
 export const getPoapEventUrl = (eventId: string): string => `https://poap.gallery/event/${eventId}`;
+
+export const getGithubUrl = () => 'https://github.com/limone-eth/findcaster';
