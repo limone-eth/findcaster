@@ -17,29 +17,31 @@ const getOrderByLabel = (_orderBy) => {
 
 const OrderByFilter = ({ orderBy, onChangeOrderBy }) => (
   <div className="flex items-center space-x-1">
-    <Text size="s">Order by:</Text>
+    <Text size="s" fontWeight="semibold">
+      Order by:&nbsp;
+    </Text>
     <Dropdown
       width="auto"
       spacing="s"
       target={
         <div className="flex cursor-pointer items-center space-x-1 text-gray-700 hover:text-gray-900 dark:text-zinc-300 dark:hover:text-zinc-100 ">
-          <Text size="s" color="inherit" fontWeight="medium">
+          <Text size="s" color="white" fontWeight="medium">
             {getOrderByLabel(orderBy)}
           </Text>
           <div>
-            <ChevronDownIcon className="w-6" />
+            <ChevronDownIcon className="w-6 text-white" />
           </div>
         </div>
       }
     >
       <div>
-        <Button size="xs" theme="bare" width="full" onClick={() => onChangeOrderBy('id')}>
+        <Button color="white" size="xs" theme="bare" width="full" onClick={() => onChangeOrderBy('id')}>
           ID
         </Button>
-        <Button size="xs" theme="bare" width="full" onClick={() => onChangeOrderBy('followers')}>
+        <Button color="white" size="xs" theme="bare" width="full" onClick={() => onChangeOrderBy('followers')}>
           Followers
         </Button>
-        <Button size="xs" theme="bare" width="full" onClick={() => onChangeOrderBy('following')}>
+        <Button color="white" size="xs" theme="bare" width="full" onClick={() => onChangeOrderBy('following')}>
           Followings
         </Button>
       </div>
