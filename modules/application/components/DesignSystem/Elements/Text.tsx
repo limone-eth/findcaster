@@ -9,19 +9,7 @@ interface Text {
   tag?: 'span' | 'div' | 'p';
   fontFamily?: 'sans' | 'mono';
   textAlign?: 'left' | 'center' | 'right';
-  color?:
-    | 'white'
-    | 'inherit'
-    | 'red-500'
-    | 'gray-100'
-    | 'gray-200'
-    | 'gray-300'
-    | 'gray-400'
-    | 'gray-500'
-    | 'gray-600'
-    | 'gray-700'
-    | 'gray-800'
-    | 'gray-900';
+  color?: 'white' | 'inherit' | 'red-500' | 'gray-100' | 'gray-600' | 'gray-700' | 'gray-800' | 'gray-900';
   fontWeight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
   lineClamp?: 'none' | 1 | 2 | 3 | 4;
 }
@@ -73,10 +61,6 @@ const Text = forwardRef<any, Text>(
 
       'text-red-300': color === 'red-500',
       'text-gray-100': color === 'gray-100',
-      'text-gray-200': color === 'gray-200',
-      'text-gray-300': color === 'gray-300',
-      'text-gray-400': color === 'gray-400',
-      'text-gray-500': color === 'gray-500',
       'text-gray-600': color === 'gray-600',
       'text-gray-700': color === 'gray-700',
       'text-gray-800': color === 'gray-800',
