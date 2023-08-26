@@ -1,6 +1,7 @@
 import { PostgrestFilterBuilder } from '@supabase/postgrest-js';
 import { SupabaseClient } from '@supabase/supabase-js';
 
+import { parseMatchingCasts, parseMatchingPoaps } from '@/app/api/profiles/utils';
 import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
 import supabaseClient from '@/modules/application/utils/supabaseClient';
 
@@ -55,14 +56,18 @@ export class FarcasterProfileService {
       if (error) {
         throw error;
       }
-      return data;
+      return data.map((d) => ({
+        ...d,
+        matching_poaps: d.matching_poaps ? parseMatchingPoaps(d.matching_poaps) : [],
+        matching_casts: d.matching_casts ? parseMatchingCasts(d.matching_casts) : [],
+      }));
     }
 
     let supabaseQuery: PostgrestFilterBuilder<any, any, any>;
     if (poapEventIds?.length > 0) {
       supabaseQuery = supabaseClient
         .from('profile')
-        .select('*,poap_events!inner(*)')
+        .select('*,matching_poaps:poap_events!inner(id, event_name)')
         .in('poap_events.id', poapEventIds);
     } else {
       supabaseQuery = supabaseClient.from('profile').select('*');
@@ -75,6 +80,10 @@ export class FarcasterProfileService {
     if (error) {
       throw error;
     }
-    return data as unknown as ProfileInterface[];
+
+    return data.map((d) => ({
+      ...d,
+      matching_poaps: d.matching_poaps ? d.matching_poaps.map((p) => ({ id: p.id, name: p.event_name })) : [],
+    })) as unknown as ProfileInterface[];
   }
 }

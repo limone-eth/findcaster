@@ -1,31 +1,47 @@
 import Link from 'next/link';
 import numeral from 'numeral';
 
-import { getWarpcastUrl } from '@/models/application/services/UrlService';
+import { getPoapEventUrl, getWarpcastCastUrl, getWarpcastUrl } from '@/models/application/services/UrlService';
 import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
-import { Text } from '@/modules/application/components/DesignSystem';
+import { Badge, Text } from '@/modules/application/components/DesignSystem';
 
-const ProfileCard = ({ profile }: { profile: ProfileInterface }) => (
-  <Link href={getWarpcastUrl(profile.username)} target="_blank" rel="noreferrer">
+const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface; searchedInterests: string[] }) => {
+  const matchingCasts =
+    searchedInterests?.length > 0 && profile.matching_casts?.length > 0
+      ? profile.matching_casts
+          .filter((c) => searchedInterests.some((castText) => c.text?.toLowerCase().includes(castText.toLowerCase())))
+          .map((cast) => {
+            const matchingInterests = searchedInterests.filter((castText) =>
+              cast.text.toLowerCase().includes(castText.toLowerCase())
+            );
+            return {
+              hash: cast.hash,
+              matchingInterests,
+            };
+          })
+      : [];
+  return (
     <div className="flex h-full grow flex-col rounded-3xl border-4 border-violet-600 bg-gradient-to-tr from-violet-500/50 to-violet-600/50 p-4 shadow-lg md:p-6">
       <div className="flex grow flex-col items-center justify-between">
-        <div className="flex grow flex-col items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            className="h-16 w-16 rounded-full border border-violet-800"
-            src={profile.avatar_url}
-            alt={profile.display_name}
-          />
-          <div className="mb-5 mt-2 flex flex-col space-y-2">
-            <Text size="xxl" fontWeight="bold" textAlign="center">
-              {profile.display_name}
-            </Text>
-            <Text textAlign="center" color="gray-900" fontWeight="normal">
-              @{profile.username}
-            </Text>
-            {profile.bio && <Text textAlign="center">{profile.bio}</Text>}
+        <Link href={getWarpcastUrl(profile.username)} target="_blank" rel="noreferrer">
+          <div className="flex grow flex-col items-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="h-16 w-16 rounded-full border border-violet-800"
+              src={profile.avatar_url}
+              alt={profile.display_name}
+            />
+            <div className="mb-5 mt-2 flex flex-col space-y-2">
+              <Text size="xxl" fontWeight="bold" textAlign="center">
+                {profile.display_name}
+              </Text>
+              <Text textAlign="center" color="gray-900" fontWeight="normal">
+                @{profile.username}
+              </Text>
+              {profile.bio && <Text textAlign="center">{profile.bio}</Text>}
+            </div>
           </div>
-        </div>
+        </Link>
         <div className="flex items-center justify-center space-x-8">
           <div className="flex flex-col items-center space-y-1">
             <div className="inline-block w-24 rounded-xl bg-violet-600 p-3 text-center text-xl font-semibold text-white">
@@ -45,8 +61,37 @@ const ProfileCard = ({ profile }: { profile: ProfileInterface }) => (
           </div>
         </div>
       </div>
+      <div className="mt-5">
+        <div className="flex flex-auto flex-wrap rounded-xl bg-violet-600 p-2">
+          {profile.matching_poaps?.length > 0 &&
+            profile.matching_poaps.slice(0, 5).map((poap) => (
+              <Link key={poap.id} href={getPoapEventUrl(poap.id)} target="_blank" rel="noreferrer">
+                <div className="mb-1 mr-1 inline-block">
+                  <Badge color="purple" size="xs">
+                    {poap.name}
+                  </Badge>
+                </div>
+              </Link>
+            ))}
+          {matchingCasts?.length > 0 &&
+            matchingCasts.slice(0, 5).map((cast) => (
+              <Link
+                key={cast.hash}
+                href={getWarpcastCastUrl(profile.username, cast.hash)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className="mb-1 mr-1 inline-block">
+                  <Badge color="purple" size="xs">
+                    {cast.matchingInterests[0]}
+                  </Badge>
+                </div>
+              </Link>
+            ))}
+        </div>
+      </div>
     </div>
-  </Link>
-);
+  );
+};
 
 export default ProfileCard;
