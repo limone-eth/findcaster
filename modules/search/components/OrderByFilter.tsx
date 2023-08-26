@@ -17,9 +17,7 @@ const getOrderByLabel = (_orderBy) => {
 
 const OrderByFilter = ({ orderBy, onChangeOrderBy }) => (
   <div className="flex items-center space-x-1">
-    <Text size="s" fontWeight="semibold">
-      Order by:&nbsp;
-    </Text>
+    <Text size="s">Order by:&nbsp;</Text>
     <Dropdown
       width="auto"
       spacing="s"
