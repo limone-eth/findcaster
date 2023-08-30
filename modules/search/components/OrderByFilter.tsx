@@ -4,12 +4,11 @@ import { Button, Dropdown, Text } from '@/modules/application/components/DesignS
 
 const getOrderByLabel = (_orderBy) => {
   switch (_orderBy) {
-    case 'id':
-      return 'ID';
     case 'followers':
       return 'Followers';
     case 'following':
       return 'Followings';
+    case 'id':
     default:
       return 'ID';
   }
