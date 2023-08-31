@@ -8,7 +8,7 @@ const PoapAdvancedSelect = ({ onSelect, onChange, footer, status, value, size, s
   return (
     <div>
       <label htmlFor="large-input" className="mb-2 block text-sm font-medium text-white dark:text-white">
-        POAPs people collected
+        Select POAPs you want to search
       </label>
       <AdvancedSelect
         placeholder="rAAVE Lisbon, ETHDenver 2022..."

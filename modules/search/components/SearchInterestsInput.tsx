@@ -21,7 +21,7 @@ const SearchInterestsInput = ({ onSelect }) => {
   return (
     <div>
       <label htmlFor="large-input" className="mb-2 block text-sm font-medium text-white dark:text-white">
-        Keywords people casted
+        Type down your interests
       </label>
       <Input placeholder="NFT, sports, gaming..." onKeyDown={handleKeyDown} onChange={handleChange} value={interest} />
     </div>
