@@ -23,6 +23,14 @@ export class FarcasterProfileService {
     return data as ProfileInterface;
   }
 
+  async getByIds(ids: number[]): Promise<ProfileInterface[]> {
+    const { data, error } = await this.supabaseClient.from(TABLE_PROFILE_NAME).select().in('id', ids);
+    if (error || !data) {
+      return null;
+    }
+    return data as ProfileInterface[];
+  }
+
   async getByUsername(username: string): Promise<ProfileInterface> {
     if (!username) {
       return null;

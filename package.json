@@ -46,6 +46,9 @@
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
     "swr": "^2.2.1",
+    "@pinecone-database/pinecone": "^0.1.6",
+    "cohere-ai": "^5.1.0",
+    "langchain": "^0.0.138",
     "yup": "^1.2.0"
   },
   "devDependencies": {

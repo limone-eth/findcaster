@@ -1,6 +1,7 @@
 import { Request } from 'next/dist/compiled/@edge-runtime/primitives';
 import { NextResponse } from 'next/server';
 
+import { searchSimilarProfileOnPinecone } from '@/app/lib/pinecone';
 import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
 import { FarcasterProfileService } from '@/models/farcaster/services/FarcasterProfileService';
 import supabaseClient from '@/modules/application/utils/supabaseClient';
@@ -15,7 +16,8 @@ export async function GET(req: Request) {
     if (!user) {
       return NextResponse.json({ error: { message: 'User not found' } }, { status: 404 });
     }
-    return NextResponse.json([user]);
+    const results = await searchSimilarProfileOnPinecone(user);
+    return NextResponse.json(results);
   }
 
   const poapEventIds = searchParams.getAll('poapEventId');
