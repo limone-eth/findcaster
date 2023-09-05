@@ -1,5 +1,5 @@
 import { PineconeClient, ScoredVector } from '@pinecone-database/pinecone';
-import { CohereEmbeddings } from 'langchain/embeddings';
+import { CohereEmbeddings } from 'langchain/embeddings/cohere';
 
 import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
 import { FarcasterCastService } from '@/models/farcaster/services/FarcasterCastService';

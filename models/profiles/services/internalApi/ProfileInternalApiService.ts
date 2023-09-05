@@ -18,6 +18,19 @@ export class ProfileInternalApiService extends AbstractInternalApiService {
 
     return response;
   }
+
+  async getSimilarProfilesByUsername(username: string): Promise<any[]> {
+    const params = [`username=${username}`];
+    const url = createUrl(`${ProfileInternalApiService.BASE_URL}`, params);
+    const response = await this.executeGetQuery<any>(url);
+    if (!response) {
+      console.log(2, response, url);
+      return null;
+      throw new Error('Something went wrong.');
+    }
+
+    return response;
+  }
 }
 
 export function getProfilesApiEndpoint(

@@ -107,7 +107,7 @@ const ButtonBase = ({ theme, size, color, status, width, align, children, onClic
   const buttonChildren = getButtonChildren(children);
 
   const className = classNames(
-    'flex relative items-center space-x-2 whitespace-no-wrap disabled:cursor-not-allowed focus:outline-none transition duration-300 font-medium',
+    'flex relative items-center space-x-2 whitespace-no-wrap disabled:cursor-not-allowed focus:outline-none transition duration-300 font-medium rounded-xl',
     mapThemeBorder[theme],
     mapThemeColor[theme][color],
     mapBaseSize[size][width],

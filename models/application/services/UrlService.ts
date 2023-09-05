@@ -2,6 +2,14 @@ export function getRootUrl(): string {
   return 'http://localhost:3000';
 }
 
+export function getUrlIndex(): string {
+  return '/';
+}
+
+export function getUrlProfile(username: string): string {
+  return `/${username}`;
+}
+
 export const createUrl = (url, params = []): string => {
   if (params && params.length > 0) {
     return `${url}?${params.join('&')}`;
