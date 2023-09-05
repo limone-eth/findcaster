@@ -10,11 +10,16 @@ const useSimilarProfiles = (username: string) => {
     (async () => {
       if (!username) return;
 
-      const profileInternalApiService = new ProfileInternalApiService(true);
-      const similarProfiles = await profileInternalApiService.getSimilarProfilesByUsername(username);
+      try {
+        const profileInternalApiService = new ProfileInternalApiService(true);
+        const similarProfiles = await profileInternalApiService.getSimilarProfilesByUsername(username);
 
-      setData(similarProfiles);
-      setIsLoading(false);
+        setData(similarProfiles);
+        setIsLoading(false);
+      } catch (error) {
+        setData(null);
+        setIsLoading(false);
+      }
     })();
   }, [username]);
 
