@@ -26,7 +26,7 @@ const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface
           })
       : [];
   return (
-    <div className="flex h-full grow flex-col rounded-3xl border-4 border-violet-600 bg-gradient-to-tr from-violet-500/50 to-violet-600/50 p-4 shadow-lg md:p-6">
+    <div className="flex h-full grow flex-col rounded-3xl border-4 border-violet-900 bg-gradient-to-tr from-violet-700/50 to-violet-700/50 p-4 md:p-6">
       <div className="flex grow flex-col items-center justify-between">
         <div className="flex grow flex-col items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
