@@ -1,5 +1,5 @@
 import { PineconeClient, ScoredVector } from '@pinecone-database/pinecone';
-import { CohereEmbeddings } from 'langchain/embeddings/cohere';
+import { pipeline } from '@xenova/transformers';
 
 import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
 import { FarcasterCastService } from '@/models/farcaster/services/FarcasterCastService';
@@ -26,12 +26,9 @@ export const searchPinecone = async (query: string): Promise<PineconeProfileDoc[
   });
   const pineconeIndex = pinecone.Index(PINECONE_INDEX);
 
-  const embeddings = new CohereEmbeddings({
-    modelName: MODEL_NAME,
-    apiKey: process.env.COHERE_API_KEY, // In Node.js defaults to process.env.COHERE_API_KEY
-    batchSize: 48, // Default value if omitted is 48. Max value is 96
-  });
-  const queryEmbedding = await embeddings.embedQuery(query);
+  const generateEmbedding = await pipeline(MODEL_NAME);
+
+  const queryEmbedding = await generateEmbedding(query);
 
   // Query Pinecone index and return top 10 document matches
   const { matches } = await pineconeIndex.query({
@@ -53,5 +50,9 @@ export const searchSimilarProfileOnPinecone = async (profile: ProfileInterface) 
   const query = `${profile.username} ${profile.bio} ${castArray}`;
   const pineconeMatches = await searchPinecone(query);
   const profileIds = pineconeMatches.map((match) => match.metadata.profileId);
-  return farcasterProfileService.getByIds(profileIds);
+  const profiles = await farcasterProfileService.getByIds(profileIds);
+  return profiles.map((p) => ({
+    ...p,
+    match: pineconeMatches.find((match) => match.metadata.profileId === p.id).score,
+  }));
 };
