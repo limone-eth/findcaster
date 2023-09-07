@@ -8,7 +8,8 @@ import supabaseClient from '@/modules/application/utils/supabaseClient';
 
 const PINECONE_INDEX = 'findcaster';
 
-const MODEL_NAME = 'embed-english-v2.0';
+const MODEL_NAME = 'question-answering';
+// const MODEL_NAME = 'embed-english-v2.0';
 
 export interface PineconeProfileDoc extends ScoredVector {
   metadata: {
@@ -26,6 +27,7 @@ export const searchPinecone = async (query: string): Promise<PineconeProfileDoc[
   });
   const pineconeIndex = pinecone.Index(PINECONE_INDEX);
 
+  // const pipeline = await PipelineSingleton.getInstance();
   const generateEmbedding = await pipeline(MODEL_NAME);
 
   const queryEmbedding = await generateEmbedding(query);
@@ -43,8 +45,9 @@ export const searchPinecone = async (query: string): Promise<PineconeProfileDoc[
 };
 
 export const searchSimilarProfileOnPinecone = async (profile: ProfileInterface) => {
-  const farcasterCastService = new FarcasterCastService(supabaseClient);
   const farcasterProfileService = new FarcasterProfileService(supabaseClient);
+
+  const farcasterCastService = new FarcasterCastService(supabaseClient);
   const casts = await farcasterCastService.getByAuthorFid(profile.id.toString());
   const castArray = casts?.map((cast) => cast.text).join(' | ');
   const query = `${profile.username} ${profile.bio} ${castArray}`;
