@@ -15,8 +15,8 @@ export async function GET(req: Request) {
     if (!profile) {
       return NextResponse.json({ error: { message: 'User not found' } }, { status: 404 });
     }
-
-    const results = await searchSimilarProfileOnPinecone(profile);
+    const topK = searchParams.get('topK') ? parseInt(searchParams.get('topK'), 10) : 10;
+    const results = await searchSimilarProfileOnPinecone(profile, topK);
     return NextResponse.json(results);
   }
 

@@ -18,7 +18,7 @@ export interface PineconeProfileDoc extends ScoredVector {
   };
 }
 
-export const searchPinecone = async (query: string): Promise<PineconeProfileDoc[]> => {
+export const searchPinecone = async (query: string, topK = 10): Promise<PineconeProfileDoc[]> => {
   const pinecone = new PineconeClient();
   await pinecone.init({
     environment: 'gcp-starter',
@@ -36,7 +36,7 @@ export const searchPinecone = async (query: string): Promise<PineconeProfileDoc[
   // Query Pinecone index and return top 10 document matches
   const { matches } = await pineconeIndex.query({
     queryRequest: {
-      topK: 10,
+      topK,
       vector: Array.from(queryEmbedding.data),
       includeMetadata: true,
       includeValues: true,
@@ -45,24 +45,26 @@ export const searchPinecone = async (query: string): Promise<PineconeProfileDoc[
   return matches as unknown as PineconeProfileDoc[];
 };
 
-export const searchSimilarProfileOnPinecone = async (profile: ProfileInterface) => {
+export const searchSimilarProfileOnPinecone = async (profile: ProfileInterface, topK = 10) => {
   const farcasterProfileService = new FarcasterProfileService(supabaseClient);
 
   const farcasterCastService = new FarcasterCastService(supabaseClient);
-  const casts = await farcasterCastService.getByAuthorFid(profile.id.toString(), 25);
+  const casts = await farcasterCastService.getByAuthorFid(profile.id.toString(), 10);
   const castArray = casts?.map((cast) => cast.text).join(' ');
   const query = `${profile.username} ${profile.bio} ${castArray}`;
-  const pineconeMatches = await searchPinecone(query);
+  const pineconeMatches = await searchPinecone(query, topK);
   const profileIds = pineconeMatches.map((match) => match.metadata.profileId);
   const profiles = await farcasterProfileService.getByIds(profileIds);
-  return profiles.map((p) => {
-    const x = pineconeMatches.find((match) => match.metadata.profileId === p.id);
-    return {
-      ...p,
-      match: {
-        score: x.score,
-        pageContent: x.metadata.pageContent,
-      },
-    };
-  });
+  return profiles
+    .map((p) => {
+      const x = pineconeMatches.find((match) => match.metadata.profileId === p.id);
+      return {
+        ...p,
+        match: {
+          score: x.score,
+          pageContent: x.metadata.pageContent,
+        },
+      };
+    })
+    .sort((a, b) => b.match.score - a.match.score);
 };
