@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { ProfileInternalApiService } from '@/models/profiles/services/internalApi/ProfileInternalApiService';
 
-const useSimilarProfiles = (username: string) => {
+const useSimilarProfiles = (username: string, topK = 10) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -12,7 +12,7 @@ const useSimilarProfiles = (username: string) => {
 
       try {
         const profileInternalApiService = new ProfileInternalApiService(true);
-        const similarProfiles = await profileInternalApiService.getSimilarProfilesByUsername(username);
+        const similarProfiles = await profileInternalApiService.getSimilarProfilesByUsername(username, topK);
 
         setData(similarProfiles);
         setIsLoading(false);

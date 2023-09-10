@@ -54,7 +54,7 @@ export const searchSimilarProfileOnPinecone = async (profile: ProfileInterface, 
   const query = `${profile.username} ${profile.bio} ${castArray}`;
   const pineconeMatches = await searchPinecone(query, topK);
   const profileIds = pineconeMatches.map((match) => match.metadata.profileId);
-  const profiles = await farcasterProfileService.getByIds(profileIds);
+  const profiles = await farcasterProfileService.getByIds(profileIds.filter((id) => id !== profile.id));
   return profiles
     .map((p) => {
       const x = pineconeMatches.find((match) => match.metadata.profileId === p.id);
