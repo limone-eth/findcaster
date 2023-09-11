@@ -26,7 +26,9 @@ export class ProfileInternalApiService extends AbstractInternalApiService {
     if (!response) {
       throw new Error('Something went wrong.');
     }
-
+    trackEvent(EVENT_SEARCH_STARTED, {
+      username,
+    });
     return response;
   }
 }
