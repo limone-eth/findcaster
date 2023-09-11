@@ -5,8 +5,8 @@ import Spinner from '@/modules/common/components/animations/Spinner';
 import ProfileCard from '@/modules/search/components/ProfileCard';
 import useSimilarProfiles from '@/modules/search/hooks/useSimilarProfiles';
 
-const SearchResultsList = ({ username }) => {
-  const { data, isLoading } = useSimilarProfiles(username);
+const SearchResultsList = ({ username, topK }) => {
+  const { data, isLoading } = useSimilarProfiles(username, topK);
 
   return (
     <div>
