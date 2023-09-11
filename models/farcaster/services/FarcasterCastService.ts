@@ -11,14 +11,16 @@ export class FarcasterCastService {
     this.supabaseClient = _supabaseClient;
   }
 
-  async getByAuthorFid(authorFid: string): Promise<CastInterface[]> {
+  async getByAuthorFid(authorFid: string, limit = 10): Promise<CastInterface[]> {
     if (!authorFid) {
       return null;
     }
     const { data, error } = await this.supabaseClient
       .from(TABLE_CAST_NAME)
       .select('hash, text')
-      .eq('author_fid', authorFid);
+      .eq('author_fid', authorFid)
+      .limit(10)
+      .order('published_at', { ascending: false });
     if (error) {
       return null;
     }

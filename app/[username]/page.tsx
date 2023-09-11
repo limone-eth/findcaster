@@ -17,7 +17,7 @@ const ProjectPage = async ({ params }: { params: { username: string } }) => {
   const farcasterProfileService = new FarcasterProfileService(supabase);
   const profile = await farcasterProfileService.getByUsername(params.username);
   if (!profile) notFound();
-
+  // TODO: get topK as query param
   return (
     <PlausibleProvider domain="findcaster-kappa.vercel.app" trackOutboundLinks={true}>
       <ContentLayout>
@@ -34,7 +34,7 @@ const ProjectPage = async ({ params }: { params: { username: string } }) => {
                 <Heading size="xxl" level={0} textAlign="center">
                   Similar Profiles to @{profile.username}
                 </Heading>
-                <SimilarProfiles username={profile.username} />
+                <SimilarProfiles username={profile.username} topK={15} />
               </div>
             </div>
           </div>

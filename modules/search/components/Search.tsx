@@ -3,18 +3,28 @@
 import { useState } from 'react';
 
 import { XMarkIcon } from '@heroicons/react/20/solid';
+import { useRouter } from 'next/navigation';
 
 import { Badge } from '@/modules/application/components/DesignSystem';
 import { PoapAdvancedSelect } from '@/modules/common/components/AdvancedSelect';
 import SearchInterestsInput from '@/modules/search/components/SearchInterestsInput';
 import SearchResultsList from '@/modules/search/components/SearchResultsList';
+import SimilarProfileInput from '@/modules/search/components/SimilarProfileInput';
 
 const Search = () => {
+  const router = useRouter();
   const [poaps, setPoaps] = useState([]);
   const [interests, setInterests] = useState([]);
 
   return (
     <div className="m-16">
+      <div className="m-auto mb-10 md:w-1/2">
+        <SimilarProfileInput
+          onSelect={(item) => {
+            router.push(`${item}`);
+          }}
+        />
+      </div>
       <div className="m-auto mb-10 md:w-1/2">
         <div className="grid gap-4 md:grid-cols-2">
           <SearchInterestsInput

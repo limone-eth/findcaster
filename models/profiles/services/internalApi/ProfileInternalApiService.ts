@@ -19,8 +19,8 @@ export class ProfileInternalApiService extends AbstractInternalApiService {
     return response;
   }
 
-  async getSimilarProfilesByUsername(username: string): Promise<any[]> {
-    const params = [`username=${username}`];
+  async getSimilarProfilesByUsername(username: string, topK = 10): Promise<any[]> {
+    const params = [`username=${username}`, `topK=${topK}`];
     const url = createUrl(`${ProfileInternalApiService.BASE_URL}`, params);
     const response = await this.executeGetQuery<any>(url);
     if (!response) {

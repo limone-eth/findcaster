@@ -1,9 +1,8 @@
-import { Request } from 'next/dist/compiled/@edge-runtime/primitives';
 import { NextResponse } from 'next/server';
 
-import { searchSimilarProfileOnPinecone } from '@/app/lib/pinecone';
 import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
 import { FarcasterProfileService } from '@/models/farcaster/services/FarcasterProfileService';
+import { searchSimilarProfileOnPinecone } from '@/models/pinecone/services/PineconeService';
 import supabaseClient from '@/modules/application/utils/supabaseClient';
 
 export async function GET(req: Request) {
@@ -12,11 +11,12 @@ export async function GET(req: Request) {
   const farcasterProfileService = new FarcasterProfileService(supabaseClient);
   const username = searchParams.get('username');
   if (username) {
-    const user = await farcasterProfileService.getByUsername(username);
-    if (!user) {
+    const profile = await farcasterProfileService.getByUsername(username);
+    if (!profile) {
       return NextResponse.json({ error: { message: 'User not found' } }, { status: 404 });
     }
-    const results = await searchSimilarProfileOnPinecone(user);
+    const topK = searchParams.get('topK') ? parseInt(searchParams.get('topK'), 10) : 10;
+    const results = await searchSimilarProfileOnPinecone(profile, topK);
     return NextResponse.json(results);
   }
 
