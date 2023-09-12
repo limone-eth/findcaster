@@ -1,9 +1,9 @@
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import PlausibleProvider from 'next-plausible';
 
-import { getUrlIndex } from '@/models/application/services/UrlService';
+import { getUrlIndex, getUrlProfile } from '@/models/application/services/UrlService';
 import { FarcasterProfileService } from '@/models/farcaster/services/FarcasterProfileService';
 import { ContentLayout, Heading, Button } from '@/modules/application/components/DesignSystem';
 import { Footer } from '@/modules/application/components/Footer';
@@ -13,11 +13,11 @@ import SimilarProfiles from '@/modules/search/components/SimilarProfiles';
 const ProjectPage = async ({ params }: { params: { username: string } }) => {
   const supabase = createServerComponentClient({ cookies });
 
-  // get project data
   const farcasterProfileService = new FarcasterProfileService(supabase);
   const profile = await farcasterProfileService.getByUsername(params.username);
-  if (!profile) notFound();
-  // TODO: get topK as query param
+  if (!profile) {
+    redirect(`${getUrlIndex()}?username=${params.username}&error=true`);
+  }
 
   return (
     <PlausibleProvider domain="findcaster-kappa.vercel.app" trackOutboundLinks={true}>
