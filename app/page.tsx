@@ -9,7 +9,7 @@ export default async function IndexPage() {
     <PlausibleProvider domain="findcaster-kappa.vercel.app" trackOutboundLinks={true}>
       <ContentLayout>
         <ContentLayout.Content>
-          <div className="pt-20">
+          <div className="pt-10">
             <Heading level={0} size="xxxl" textAlign="center">
               Findcaster
             </Heading>

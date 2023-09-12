@@ -5,7 +5,7 @@ import PlausibleProvider from 'next-plausible';
 
 import { getUrlIndex } from '@/models/application/services/UrlService';
 import { FarcasterProfileService } from '@/models/farcaster/services/FarcasterProfileService';
-import { Button, ContentLayout, Heading } from '@/modules/application/components/DesignSystem';
+import { ContentLayout, Heading, Button } from '@/modules/application/components/DesignSystem';
 import { Footer } from '@/modules/application/components/Footer';
 import ProfileCard from '@/modules/search/components/ProfileCard';
 import SimilarProfiles from '@/modules/search/components/SimilarProfiles';
@@ -18,6 +18,7 @@ const ProjectPage = async ({ params }: { params: { username: string } }) => {
   const profile = await farcasterProfileService.getByUsername(params.username);
   if (!profile) notFound();
   // TODO: get topK as query param
+
   return (
     <PlausibleProvider domain="findcaster-kappa.vercel.app" trackOutboundLinks={true}>
       <ContentLayout>
@@ -34,7 +35,7 @@ const ProjectPage = async ({ params }: { params: { username: string } }) => {
                 <Heading size="xxl" level={0} textAlign="center">
                   Similar Profiles to @{profile.username}
                 </Heading>
-                <SimilarProfiles username={profile.username} topK={15} />
+                <SimilarProfiles username={profile.username} topK={5} />
               </div>
             </div>
           </div>
