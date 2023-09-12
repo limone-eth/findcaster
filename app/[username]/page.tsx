@@ -35,7 +35,7 @@ const ProjectPage = async ({ params }: { params: { username: string } }) => {
                 <Heading size="xxl" level={0} textAlign="center">
                   Similar Profiles to @{profile.username}
                 </Heading>
-                <SimilarProfiles username={profile.username} topK={5} />
+                <SimilarProfiles username={profile.username} topK={10} />
               </div>
             </div>
           </div>
