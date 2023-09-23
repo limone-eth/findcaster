@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 
 import { pineconeOpenAI, pineconeQueryDocs, queryProfilesOnPinecone } from '@/models/pinecone/services/PineconeService';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: Request) {
   // Process a GET request
   const { searchParams } = new URL(req.url);
