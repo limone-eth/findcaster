@@ -1,4 +1,5 @@
 import PlausibleProvider from 'next-plausible';
+import Typewriter from 'typewriter-effect';
 
 import { ContentLayout, Heading, Text } from '@/modules/application/components/DesignSystem';
 import { Footer } from '@/modules/application/components/Footer';
@@ -14,7 +15,7 @@ export default async function IndexPage({ searchParams }: { searchParams: { user
               Findcaster
             </Heading>
             <Text textAlign="center" size="xl" fontFamily="mono">
-              Connect with like-minded people on Farcaster
+              The best place to find people on Farcaster.
             </Text>
           </div>
           {searchParams?.error && (
