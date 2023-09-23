@@ -17,9 +17,9 @@ export class FarcasterCastService {
     }
     const { data, error } = await this.supabaseClient
       .from(TABLE_CAST_NAME)
-      .select('hash, text')
+      .select('author_fid, hash, text')
       .eq('author_fid', authorFid)
-      .limit(10)
+      .limit(limit)
       .order('published_at', { ascending: false });
     if (error) {
       return null;

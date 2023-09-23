@@ -13,4 +13,5 @@ export interface ProfileInterface {
   updated_at: number;
   matching_casts: MatchingCastInterface[];
   matching_poaps?: MatchingPoapInterface[];
+  matchingReason: string;
 }

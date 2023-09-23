@@ -5,19 +5,12 @@ import { fetchFromAuthedApi } from '@/modules/common/utils/fetcher';
 
 const LIMIT = 9;
 
-const getSwrKey = (pageIndex, previousPageData, poaps, interests, orderBy, orderDir) =>
-  getProfilesApiEndpoint(
-    poaps?.map((poap) => poap.id),
-    interests,
-    pageIndex,
-    LIMIT,
-    orderBy,
-    orderDir
-  );
+const getSwrKey = (pageIndex, previousPageData, query, orderBy, orderDir) =>
+  getProfilesApiEndpoint(query, pageIndex, LIMIT, orderBy, orderDir);
 
-const useProfileSearch = (poaps, interests, orderBy, orderDir) => {
+const useProfileSearch = (query, orderBy, orderDir) => {
   const { data, size, setSize } = useSWRInfinite(
-    (...args) => getSwrKey(...args, poaps, interests, orderBy, orderDir),
+    (...args) => getSwrKey(...args, query, orderBy, orderDir),
     fetchFromAuthedApi,
     {
       revalidateOnFocus: true,

@@ -1,34 +1,14 @@
 import Link from 'next/link';
 import numeral from 'numeral';
 
-import {
-  getPoapEventUrl,
-  getUrlProfile,
-  getWarpcastCastUrl,
-  getWarpcastUrl,
-} from '@/models/application/services/UrlService';
+import { getWarpcastUrl } from '@/models/application/services/UrlService';
 import { ProfileInterface } from '@/models/farcaster/interfaces/ProfileInterface';
-import { Badge, Button, Text } from '@/modules/application/components/DesignSystem';
+import { Text } from '@/modules/application/components/DesignSystem';
 
-const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface; searchedInterests?: string[] }) => {
-  const matchingCasts =
-    searchedInterests?.length > 0 && profile.matching_casts?.length > 0
-      ? profile.matching_casts
-          .filter((c) => searchedInterests.some((castText) => c.text?.toLowerCase().includes(castText.toLowerCase())))
-          .map((cast) => {
-            const matchingInterests = searchedInterests.filter((castText) =>
-              cast.text.toLowerCase().includes(castText.toLowerCase())
-            );
-            return {
-              hash: cast.hash,
-              matchingInterests,
-            };
-          })
-      : [];
-
-  return (
-    <div className="flex h-full grow flex-col rounded-3xl border-2 border-violet-900 bg-violet-800 p-4 shadow-md md:p-6">
-      <div className="flex grow flex-col items-center justify-between">
+const ProfileCard = ({ profile }: { profile: ProfileInterface }) => (
+  <div className="flex h-full grow flex-col rounded-3xl border-2 border-violet-900 bg-violet-800 p-4 shadow-md md:p-6">
+    <div className="flex grow flex-col items-center justify-between">
+      <Link href={getWarpcastUrl(profile.username)} target="_blank" rel="noreferrer">
         <div className="flex grow flex-col items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -46,66 +26,33 @@ const ProfileCard = ({ profile, searchedInterests }: { profile: ProfileInterface
             {profile.bio && <Text textAlign="center">{profile.bio}</Text>}
           </div>
         </div>
-        <div className="flex items-center justify-center space-x-8">
-          <div className="flex flex-col items-center space-y-1">
-            <div className="inline-block w-24 rounded-xl bg-violet-600 p-1 text-center text-xl font-semibold text-white">
-              {numeral(profile.followers || 0).format('0,0a')}
-            </div>
-            <Text size="s" fontWeight="semibold">
-              Followers
-            </Text>
+      </Link>
+      <div className="flex items-center justify-center space-x-8">
+        <div className="flex flex-col items-center space-y-1">
+          <div className="inline-block w-24 rounded-xl bg-violet-600 p-1 text-center text-xl font-semibold text-white">
+            {numeral(profile.followers || 0).format('0,0a')}
           </div>
-          <div className="flex flex-col items-center space-y-1">
-            <div className="inline-block w-24 rounded-xl bg-violet-600 p-1 text-center text-xl font-semibold text-white">
-              {numeral(profile.following || 0).format('0,0a')}
-            </div>
-            <Text size="s" fontWeight="semibold">
-              Following
-            </Text>
-          </div>
+          <Text size="s" fontWeight="semibold">
+            Followers
+          </Text>
         </div>
-      </div>
-      {(profile.matching_poaps?.length > 0 || matchingCasts?.length > 0) && (
-        <div className="mt-5">
-          <div className="flex flex-auto flex-wrap rounded-xl bg-violet-600 p-2">
-            {profile.matching_poaps?.length > 0 &&
-              profile.matching_poaps.slice(0, 5).map((poap) => (
-                <Link key={poap.id} href={getPoapEventUrl(poap.id)} target="_blank" rel="noreferrer">
-                  <div className="mb-1 mr-1 inline-block">
-                    <Badge color="purple" size="xs">
-                      {poap.name}
-                    </Badge>
-                  </div>
-                </Link>
-              ))}
-            {matchingCasts?.length > 0 &&
-              matchingCasts.slice(0, 5).map((cast) => (
-                <Link
-                  key={cast.hash}
-                  href={getWarpcastCastUrl(profile.username, cast.hash)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <div className="mb-1 mr-1 inline-block">
-                    <Badge color="purple" size="xs">
-                      {cast.matchingInterests[0]}
-                    </Badge>
-                  </div>
-                </Link>
-              ))}
+        <div className="flex flex-col items-center space-y-1">
+          <div className="inline-block w-24 rounded-xl bg-violet-600 p-1 text-center text-xl font-semibold text-white">
+            {numeral(profile.following || 0).format('0,0a')}
           </div>
+          <Text size="s" fontWeight="semibold">
+            Following
+          </Text>
         </div>
-      )}
-      <div className="mt-10 flex items-center justify-between">
-        <Button size="xs" href={getUrlProfile(profile.username)}>
-          Similar profiles
-        </Button>
-        <Button size="xs" href={getWarpcastUrl(profile.username)} target="_blank">
-          Warpcast profile
-        </Button>
       </div>
     </div>
-  );
-};
+
+    <div className="mt-10 text-white">
+      <div>Matching Reason:</div>
+      <br />
+      <div>{profile.matchingReason}</div>
+    </div>
+  </div>
+);
 
 export default ProfileCard;

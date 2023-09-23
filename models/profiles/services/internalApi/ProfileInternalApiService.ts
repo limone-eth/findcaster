@@ -31,24 +31,26 @@ export class ProfileInternalApiService extends AbstractInternalApiService {
     });
     return response;
   }
+
+  async queryProfilesSemantic(query: string, topK = 25): Promise<any[]> {
+    const params = [`query=${query}`, `topK=${topK}`];
+    const url = createUrl(`${ProfileInternalApiService.BASE_URL}`, params);
+    const response = await this.executeGetQuery<any>(url);
+    if (!response) {
+      throw new Error('Something went wrong.');
+    }
+    trackEvent(EVENT_SEARCH_STARTED, {
+      query,
+    });
+    return response;
+  }
 }
 
-export function getProfilesApiEndpoint(
-  poapEventIds: number[],
-  interests: string[],
-  page = 0,
-  limit = 10,
-  orderBy = 'id',
-  orderDir = 'desc'
-) {
-  const params = [
-    ...poapEventIds.map((poapEventId) => `poapEventId=${poapEventId}`),
-    ...interests.map((interest) => `interest=${interest}`),
-  ];
+export function getProfilesApiEndpoint(query: string, page = 0, limit = 10, orderBy = 'id', orderDir = 'desc') {
+  const params = [`textQueryAI=${query}`];
 
   trackEvent(EVENT_SEARCH_STARTED, {
-    poapEventIds,
-    interests,
+    query,
   });
 
   params.push(`page=${page}`);
