@@ -145,15 +145,17 @@ export const pineconeOpenAI = async (question: string, topK = 25) => {
     pooling: 'mean',
     normalize: true,
   });
+  console.time('pinecone query');
   // 6. Query Pinecone index and return top 10 matches
   const queryResponse = await index.query({
     queryRequest: {
-      topK: 25,
+      topK: 9,
       vector: Array.from(queryEmbedding.data),
       includeMetadata: true,
       includeValues: true,
     },
   });
+  console.timeEnd('pinecone query');
   const context = queryResponse.matches
     .map((match) => {
       const { metadata }: any = match;

@@ -14,7 +14,7 @@ const templates = {
         - If you cannot find any profile that matches the question well enough, you should answer with: I couldn't find any matches to your query.\n
         Format: {format_instructions}\n 
         Question: {question}`,
-  newQuery: `These are 25 results on a user directory platform for a particular search query.\n
+  newQuery: `These are 10 results on a user directory platform for a particular search query.\n
         For each of the results provide a reason for why they are relevant to the query. Step by step, give a valid reason for each profile you have matched for the question. The reason should belong to the profile. Use maximum 520 characters for each profile reason.
         Respond in this format: {format_instructions} \n 
         Results: {context}\n
@@ -52,7 +52,9 @@ export const askOpenAI = async (question: string, context: string) => {
     context,
     verbose: true,
   });
+  console.time('llm call');
   const response = await llm.call(input);
+  console.timeEnd('llm call');
   return {
     response,
     question,
