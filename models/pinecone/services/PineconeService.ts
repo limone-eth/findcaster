@@ -149,7 +149,7 @@ export const pineconeOpenAI = async (question: string, topK = 25) => {
   // 6. Query Pinecone index and return top 10 matches
   const queryResponse = await index.query({
     queryRequest: {
-      topK: 9,
+      topK: 6,
       vector: Array.from(queryEmbedding.data),
       includeMetadata: true,
       includeValues: true,
