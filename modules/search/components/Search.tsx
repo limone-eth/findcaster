@@ -10,8 +10,8 @@ import SearchResultsList from '@/modules/search/components/SearchResultsList';
 const Search = () => {
   const [query, setQuery] = useState('');
   return (
-    <div className="m-16">
-      <div className="mx-auto mb-4 flex justify-center gap-2 text-3xl font-bold text-white">
+    <div className="p-8">
+      <div className="xs:text-xl mx-auto mb-4 flex justify-center gap-2 font-bold text-white sm:text-2xl md:text-2xl lg:text-3xl">
         Find me people who
         <Typewriter
           options={{
@@ -20,7 +20,7 @@ const Search = () => {
             loop: true,
             delay: 50,
             deleteSpeed: 0,
-            wrapperClassName: 'text-3xl font-bold text-amber-300',
+            wrapperClassName: 'xs:text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-amber-300',
           }}
         />
       </div>
