@@ -1,5 +1,5 @@
+import Image from 'next/image';
 import PlausibleProvider from 'next-plausible';
-import Typewriter from 'typewriter-effect';
 
 import { ContentLayout, Heading, Text } from '@/modules/application/components/DesignSystem';
 import { Footer } from '@/modules/application/components/Footer';
@@ -7,10 +7,11 @@ import Search from '@/modules/search/components/Search';
 
 export default async function IndexPage({ searchParams }: { searchParams: { username: string; error: boolean } }) {
   return (
-    <PlausibleProvider domain="findcaster-kappa.vercel.app" trackOutboundLinks={true}>
+    <PlausibleProvider domain="findcaster.com" trackOutboundLinks={true}>
       <ContentLayout>
         <ContentLayout.Content>
-          <div className="pt-10">
+          <div className="mt-5 flex flex-col items-center justify-center text-center">
+            <Image src="/images/logo.svg" alt="logo" width={50} height={50} />
             <Heading level={0} size="xxxl" textAlign="center">
               Findcaster
             </Heading>
